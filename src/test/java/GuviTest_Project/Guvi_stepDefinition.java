@@ -17,9 +17,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -220,6 +222,41 @@ public class Guvi_stepDefinition {
         driver.close();
         
        
+    }
+    
+    @When("I scroll the page and see the scroll bar on page")
+    public void iscrollthepage() {
+    /*	 LOGGER.info("See the Scrollbar");
+    	 
+    	  try {
+              Thread.sleep(2000);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }*/
+    	 
+    //	 driver.findElement(By.cssSelector("body")).sendKeys(Keys.END);
+    	 
+    	 JavascriptExecutor ls = (JavascriptExecutor) driver;
+ 	  	ls.executeScript("window.scrollBy(0,250)", "");
+    	 
+//    	WebElement scrollBar = driver.findElement(By.className("swiper-slide"));
+//        assertTrue(scrollBar.isDisplayed());
+    	
+    }
+    @Then("I should see a dropdown menu with relevant options")
+    public void dropdownandmousehove() {
+    	 LOGGER.info("checking mouse hover and navigation in header");
+    	 WebElement dropdownTab = driver.findElement(By.id("navbarDropdown"));
+
+         Actions actions = new Actions(driver);
+         actions.moveToElement(dropdownTab).perform();
+
+         WebElement dropdownOption = driver.findElement(By.xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[2]/div/ul/li[4]/a/p[1]"));
+         dropdownOption.click();
+         
+         driver.navigate().back();
+         
+         driver.close();
     }
     
     
