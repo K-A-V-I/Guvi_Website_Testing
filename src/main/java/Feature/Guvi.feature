@@ -36,4 +36,8 @@ Examples:
   | SheetNumber | RowNumber |
   | 2           | 1         |
    
-      
+       @homepage_function
+  Scenario: Verify homepage menus
+    Given I am on the homepage
+    When I scroll the page and see the scroll bar on page
+    And I should see a dropdown menu with relevant options
